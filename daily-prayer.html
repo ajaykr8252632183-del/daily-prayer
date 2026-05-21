@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>दैनिक प्रार्थना | Daily Prayer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A843;
+    --gold-light: #F0C866;
+    --dark: #0D0D0D;
+    --dark2: #161616;
+    --dark3: #1E1E1E;
+    --dark4: #252525;
+    --card: #1A1A1A;
+    --text: #E8E0D0;
+    --text-dim: #8A8070;
+    --green: #4CAF50;
+    --blue: #5B9BD5;
+    --purple: #9B7EC8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 70px;
+  }
+
+  /* ===== TOP BAR ===== */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: var(--dark2);
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-title {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .topbar-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-dim);
+  }
+
+  /* ===== PAGES ===== */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ===== HOME PAGE ===== */
+  .hero {
+    text-align: center;
+    padding: 30px 20px 20px;
+  }
+  .church-icon {
+    font-size: 48px;
+    margin-bottom: 6px;
+  }
+  .hero-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Verse Card */
+  .verse-card {
+    margin: 0 16px 16px;
+    background: linear-gradient(135deg, #1a1500, #1e1a00, #1a1500);
+    border: 1px solid #3a2e00;
+    border-left: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px;
+    position: relative;
+  }
+  .verse-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .verse-badge-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .verse-badge-text {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .verse-ref-hi {
+    font-size: 13px;
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .verse-text-hi {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #d0c8b8;
+    margin-bottom: 10px;
+  }
+  .verse-ref-en {
+    font-size: 11px;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .verse-text-en {
+    font-family: 'Crimson Text', serif;
+    font-size: 14px;
+    color: #8A8070;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .share-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 12px;
+    cursor: pointer;
+    float: right;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  .share-btn:hover { background: rgba(212,168,67,0.1); }
+
+  /* Prayer List Cards */
+  .section-cards { margin: 0 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .prayer-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .prayer-card:hover, .prayer-card:active { border-color: var(--gold); background: #202020; }
+  .prayer-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .prayer-card-text { flex: 1; }
+  .prayer-card-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .prayer-card-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .prayer-card-arrow { color: var(--text-dim); font-size: 16px; }
+
+  /* Devotional Banner */
+  .devotional-banner {
+    margin: 0 16px 20px;
+    background: linear-gradient(135deg, #1a0f00, #2a1800);
+    border-radius: 14px;
+    padding: 22px 18px;
+    border: 1px solid #3a2200;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .devotional-banner:hover { border-color: var(--gold); }
+  .devotional-banner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .devotional-banner p { font-size: 13px; color: var(--text-dim); }
+
+  /* ===== PRAYERS PAGE ===== */
+  .page-header {
+    padding: 24px 18px 16px;
+    background: linear-gradient(180deg, #1a1500 0%, transparent 100%);
+  }
+  .page-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .page-header p { font-size: 13px; color: var(--text-dim); }
+
+  .prayer-detail-card {
+    margin: 0 16px 14px;
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .prayer-detail-card:hover { border-color: var(--gold); background: #1f1f1f; }
+  .pdc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .pdc-icon { font-size: 28px; }
+  .pdc-title { font-size: 16px; font-weight: 600; color: var(--text); }
+  .pdc-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .pdc-verse {
+    font-family: 'Crimson Text', serif;
+    font-size: 14px;
+    color: #8A8070;
+    font-style: italic;
+    border-left: 2px solid var(--gold);
+    padding-left: 10px;
+    line-height: 1.5;
+  }
+
+  /* Prayer Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal-box {
+    background: var(--dark3);
+    border: 1px solid #3a2e00;
+    border-radius: 18px;
+    padding: 24px;
+    max-width: 480px;
+    width: 100%;
+    margin-top: 40px;
+  }
+  .modal-close {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: -4px;
+  }
+  .modal-icon { font-size: 40px; margin-bottom: 10px; }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .modal-subtitle { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+  .modal-divider { height: 1px; background: #2a2a2a; margin: 14px 0; }
+  .modal-prayer-text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .modal-verse-box {
+    background: #1a1500;
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 16px;
+  }
+  .modal-verse-ref { font-size: 11px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .modal-verse-txt { font-family: 'Crimson Text', serif; font-style: italic; color: #b8a888; font-size: 14px; }
+
+  /* ===== BIBLE PAGE ===== */
+  .bible-search {
+    margin: 0 16px 16px;
+    background: var(--dark4);
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bible-search input {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .bible-search input::placeholder { color: var(--text-dim); }
+
+  .testament-tab {
+    display: flex;
+    margin: 0 16px 16px;
+    background: var(--dark4);
+    border-radius: 10px;
+    padding: 4px;
+  }
+  .testament-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: none;
+    color: var(--text-dim);
+    font-size: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .testament-btn.active { background: var(--gold); color: #000; font-weight: 600; }
+
+  .bible-books { margin: 0 16px; }
+  .bible-book-item {
+    display: flex;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid #1e1e1e;
+    cursor: pointer;
+    gap: 12px;
+    transition: all 0.2s;
+  }
+  .bible-book-item:hover { color: var(--gold); padding-left: 6px; }
+  .book-num { font-size: 11px; color: var(--text-dim); width: 22px; text-align: right; }
+  .book-name-hi { font-size: 15px; color: var(--text); }
+  .book-name-en { font-size: 11px; color: var(--text-dim); }
+  .book-arrow { margin-left: auto; color: var(--text-dim); }
+
+  /* ===== HYMNS PAGE ===== */
+  .hymn-filter {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px 14px;
+    overflow-x: auto;
+  }
+  .hymn-filter::-webkit-scrollbar { display: none; }
+  .filter-chip {
+    padding: 6px 14px;
+    border: 1px solid #2a2a2a;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--text-dim);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .filter-chip.active { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,0.1); }
+
+  .hymn-card {
+    margin: 0 16px 12px;
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .hymn-card:hover { border-color: var(--gold); }
+  .hymn-num { font-size: 11px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .hymn-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .hymn-first-line { font-family: 'Crimson Text', serif; font-size: 13px; color: var(--text-dim); font-style: italic; }
+  .hymn-footer { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .hymn-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: rgba(212,168,67,0.1);
+    color: var(--gold);
+    border: 1px solid rgba(212,168,67,0.2);
+  }
+
+  /* ===== SETTINGS PAGE ===== */
+  .settings-section {
+    margin: 0 16px 20px;
+  }
+  .settings-section-title {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+  .settings-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 14px;
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 14px;
+  }
+  .settings-item:first-child { border-radius: 12px 12px 0 0; }
+  .settings-item:last-child { border-radius: 0 0 12px 12px; }
+  .settings-item:only-child { border-radius: 12px; }
+  .settings-item + .settings-item { border-top: none; }
+  .settings-item:hover { background: #202020; }
+  .settings-icon { font-size: 20px; width: 30px; text-align: center; }
+  .settings-label { flex: 1; font-size: 15px; color: var(--text); }
+  .settings-value { font-size: 13px; color: var(--text-dim); }
+  .settings-arrow { color: var(--text-dim); }
+
+  .toggle-wrap { display: flex; align-items: center; }
+  .toggle {
+    width: 44px; height: 24px;
+    background: #333;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .toggle.on { background: var(--gold); }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 18px; height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 3px; left: 3px;
+    transition: left 0.3s;
+  }
+  .toggle.on::after { left: 23px; }
+
+  .version-info { text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px; }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--dark2);
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    z-index: 100;
+    height: 65px;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    padding: 8px 0;
+  }
+  .nav-item:active { transform: scale(0.92); }
+  .nav-icon { font-size: 22px; color: var(--text-dim); transition: color 0.2s; }
+  .nav-label { font-size: 10px; color: var(--text-dim); transition: color 0.2s; font-family: 'Noto Sans Devanagari', sans-serif; }
+  .nav-item.active .nav-icon,
+  .nav-item.active .nav-label { color: var(--gold); }
+  .nav-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; margin-top: 2px; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1a1500;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 300;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Responsive */
+  @media (min-width: 480px) {
+    body { max-width: 480px; margin: 0 auto; }
+    .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span class="topbar-icon">👤</span>
+  <span class="topbar-title">दैनिक प्रार्थना Daily Prayer</span>
+  <span class="topbar-icon">🔔</span>
+</div>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="church-icon">⛪</div>
+    <div class="hero-label">दैनिक प्रार्थना</div>
+    <div class="hero-title">Daily Prayer</div>
+  </div>
+
+  <div class="verse-card">
+    <div class="verse-badge">
+      <div class="verse-badge-dot"></div>
+      <span class="verse-badge-text">✦ आज का वचन | Verse of the Day</span>
+    </div>
+    <div class="verse-ref-hi">भजन संहिता 23:1</div>
+    <div class="verse-text-hi">प्रभु मेरा चरवाहा है; मुझे किसी वस्तु की कमी नहीं होगी।</div>
+    <div class="verse-ref-en">Psalm 23:1</div>
+    <div class="verse-text-en">The Lord is my shepherd; I shall not want.</div>
+    <button class="share-btn" onclick="shareVerse()">↗ Share Word</button>
+    <div style="clear:both"></div>
+  </div>
+
+  <div class="section-cards">
+    <div class="prayer-card" onclick="navigateTo('prayers')">
+      <div class="prayer-icon-wrap" style="background:#1a1400;">🌅</div>
+      <div class="prayer-card-text">
+        <div class="prayer-card-title">सगना Morning Prayer</div>
+        <div class="prayer-card-sub">Start your day in His grace</div>
+      </div>
+      <span class="prayer-card-arrow">›</span>
+    </div>
+    <div class="prayer-card" onclick="navigateTo('prayers')">
+      <div class="prayer-icon-wrap" style="background:#0f0f2a;">🌆</div>
+      <div class="prayer-card-text">
+        <div class="prayer-card-title">इवणर Evening Prayer</div>
+        <div class="prayer-card-sub">Reflection and gratitude</div>
+      </div>
+      <span class="prayer-card-arrow">›</span>
+    </div>
+    <div class="prayer-card" onclick="navigateTo('prayers')">
+      <div class="prayer-icon-wrap" style="background:#0a0a1a;">🌙</div>
+      <div class="prayer-card-text">
+        <div class="prayer-card-title">नायर Night Prayer</div>
+        <div class="prayer-card-sub">Peaceful rest in faith</div>
+      </div>
+      <span class="prayer-card-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="devotional-banner" onclick="navigateTo('bible')">
+    <h3>Weekly Devotional</h3>
+    <p>Explore our latest study on the Psalms</p>
+  </div>
+</div>
+
+<!-- ==================== PRAYERS PAGE ==================== -->
+<div id="page-prayers" class="page">
+  <div class="page-header">
+    <h2>🙏 Prayers</h2>
+    <p>प्रतिदिन की प्रार्थनाएं</p>
+  </div>
+
+  <div class="prayer-detail-card" onclick="openModal('morning')">
+    <div class="pdc-top">
+      <div class="pdc-icon">🌅</div>
+      <div>
+        <div class="pdc-title">सगना Morning Prayer</div>
+        <div class="pdc-sub">प्रतिदिन सुबह की प्रार्थना</div>
+      </div>
+    </div>
+    <div class="pdc-verse">"यह वह दिन है जो यहोवा ने बनाया है; हम इसमें आनंदित और मगन होंगे।" — भजन 118:24</div>
+  </div>
+
+  <div class="prayer-detail-card" onclick="openModal('evening')">
+    <div class="pdc-top">
+      <div class="pdc-icon">🌆</div>
+      <div>
+        <div class="pdc-title">इवणर Evening Prayer</div>
+        <div class="pdc-sub">संध्या कालीन प्रार्थना</div>
+      </div>
+    </div>
+    <div class="pdc-verse">"हे परमेश्वर, मेरी सुधि ले और मुझे देख।" — भजन 25:16</div>
+  </div>
+
+  <div class="prayer-detail-card" onclick="openModal('night')">
+    <div class="pdc-top">
+      <div class="pdc-icon">🌙</div>
+      <div>
+        <div class="pdc-title">नायर Night Prayer</div>
+        <div class="pdc-sub">रात्रि की प्रार्थना</div>
+      </div>
+    </div>
+    <div class="pdc-verse">"वह अपने प्रिय को नींद देता है।" — भजन 127:2</div>
+  </div>
+
+  <div class="prayer-detail-card" onclick="openModal('thanksgiving')">
+    <div class="pdc-top">
+      <div class="pdc-icon">🕊️</div>
+      <div>
+        <div class="pdc-title">Thanksgiving Prayer</div>
+        <div class="pdc-sub">धन्यवाद की प्रार्थना</div>
+      </div>
+    </div>
+    <div class="pdc-verse">"हर बात में धन्यवाद करो।" — 1 थिस्सलुनीकियों 5:18</div>
+  </div>
+
+  <div class="prayer-detail-card" onclick="openModal('healing')">
+    <div class="pdc-top">
+      <div class="pdc-icon">💫</div>
+      <div>
+        <div class="pdc-title">Healing Prayer</div>
+        <div class="pdc-sub">चंगाई की प्रार्थना</div>
+      </div>
+    </div>
+    <div class="pdc-verse">"मैं तेरा परमेश्वर यहोवा हूं, जो तुझे चंगा करता है।" — निर्गमन 15:26</div>
+  </div>
+
+  <div class="prayer-detail-card" onclick="openModal('family')">
+    <div class="pdc-top">
+      <div class="pdc-icon">👨‍👩‍👧‍👦</div>
+      <div>
+        <div class="pdc-title">Family Prayer</div>
+        <div class="pdc-sub">परिवार के लिए प्रार्थना</div>
+      </div>
+    </div>
+    <div class="pdc-verse">"तू और तेरा घराना — विश्वास रखो।" — प्रेरितों 16:31</div>
+  </div>
+</div>
+
+<!-- ==================== BIBLE PAGE ==================== -->
+<div id="page-bible" class="page">
+  <div class="page-header">
+    <h2>📖 Bible</h2>
+    <p>पवित्र बाइबिल</p>
+  </div>
+
+  <div class="bible-search">
+    <span>🔍</span>
+    <input type="text" placeholder="खोजें / Search..." oninput="filterBooks(this.value)">
+  </div>
+
+  <div class="testament-tab">
+    <button class="testament-btn active" onclick="showTestament('old', this)">पुराना नियम (Old Testament)</button>
+    <button class="testament-btn" onclick="showTestament('new', this)">नया नियम (New Testament)</button>
+  </div>
+
+  <div class="bible-books" id="bible-books-list">
+    <!-- Filled by JS -->
+  </div>
+</div>
+
+<!-- ==================== HYMNS PAGE ==================== -->
+<div id="page-hymns" class="page">
+  <div class="page-header">
+    <h2>🎵 Hymns</h2>
+    <p>भजन संग्रह</p>
+  </div>
+
+  <div class="hymn-filter">
+    <button class="filter-chip active" onclick="filterHymns('all', this)">सभी</button>
+    <button class="filter-chip" onclick="filterHymns('praise', this)">स्तुति</button>
+    <button class="filter-chip" onclick="filterHymns('prayer', this)">प्रार्थना</button>
+    <button class="filter-chip" onclick="filterHymns('christmas', this)">क्रिसमस</button>
+    <button class="filter-chip" onclick="filterHymns('easter', this)">ईस्टर</button>
+  </div>
+
+  <div id="hymns-list">
+    <!-- Filled by JS -->
+  </div>
+</div>
+
+<!-- ==================== SETTINGS PAGE ==================== -->
+<div id="page-settings" class="page">
+  <div class="page-header">
+    <h2>⚙️ Settings</h2>
+    <p>सेटिंग्स</p>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-section-title">Notifications / सूचनाएं</div>
+    <div class="settings-item">
+      <span class="settings-icon">🔔</span>
+      <span class="settings-label">Daily Reminders</span>
+      <div class="toggle-wrap"><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+    </div>
+    <div class="settings-item">
+      <span class="settings-icon">🌅</span>
+      <span class="settings-label">Morning Prayer Reminder</span>
+      <span class="settings-value">6:00 AM</span>
+    </div>
+    <div class="settings-item">
+      <span class="settings-icon">🌙</span>
+      <span class="settings-label">Night Prayer Reminder</span>
+      <span class="settings-value">9:00 PM</span>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-section-title">Appearance / दिखावट</div>
+    <div class="settings-item">
+      <span class="settings-icon">🌗</span>
+      <span class="settings-label">Dark Mode</span>
+      <div class="toggle-wrap"><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+    </div>
+    <div class="settings-item">
+      <span class="settings-icon">🔤</span>
+      <span class="settings-label">Font Size</span>
+      <span class="settings-value">Medium ›</span>
+    </div>
+    <div class="settings-item">
+      <span class="settings-icon">🌐</span>
+      <span class="settings-label">Language / भाषा</span>
+      <span class="settings-value">Hindi + English ›</span>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-section-title">About / जानकारी</div>
+    <div class="settings-item" onclick="shareApp()">
+      <span class="settings-icon">📤</span>
+      <span class="settings-label">Share App</span>
+      <span class="settings-arrow">›</span>
+    </div>
+    <div class="settings-item">
+      <span class="settings-icon">⭐</span>
+      <span class="settings-label">Rate Us</span>
+      <span class="settings-arrow">›</span>
+    </div>
+    <div class="settings-item">
+      <span class="settings-icon">📋</span>
+      <span class="settings-label">Privacy Policy</span>
+      <span class="settings-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="version-info">दैनिक प्रार्थना v2.0 · Daily Prayer App</div>
+</div>
+
+<!-- ==================== BOTTOM NAV ==================== -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="navigateTo('home')" id="nav-home">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+    <div class="nav-dot"></div>
+  </button>
+  <button class="nav-item" onclick="navigateTo('prayers')" id="nav-prayers">
+    <span class="nav-icon">🙏</span>
+    <span class="nav-label">Prayers</span>
+  </button>
+  <button class="nav-item" onclick="navigateTo('bible')" id="nav-bible">
+    <span class="nav-icon">📖</span>
+    <span class="nav-label">Bible</span>
+  </button>
+  <button class="nav-item" onclick="navigateTo('hymns')" id="nav-hymns">
+    <span class="nav-icon">🎵</span>
+    <span class="nav-label">Hymns</span>
+  </button>
+  <button class="nav-item" onclick="navigateTo('settings')" id="nav-settings">
+    <span class="nav-icon">⚙️</span>
+    <span class="nav-label">Settings</span>
+  </button>
+</nav>
+
+<!-- PRAYER MODAL -->
+<div class="modal-overlay" id="prayer-modal" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon" id="modal-icon">🌅</div>
+    <div class="modal-title" id="modal-title">Morning Prayer</div>
+    <div class="modal-subtitle" id="modal-subtitle">सुबह की प्रार्थना</div>
+    <div class="modal-divider"></div>
+    <div class="modal-prayer-text" id="modal-prayer"></div>
+    <div class="modal-verse-box">
+      <div class="modal-verse-ref" id="modal-verse-ref"></div>
+      <div class="modal-verse-txt" id="modal-verse-txt"></div>
+    </div>
+    <br>
+    <button class="share-btn" style="float:none; border:1px solid var(--gold); border-radius:8px; padding:10px 16px; width:100%; justify-content:center; font-size:13px;" onclick="sharePrayer()">📤 Share This Prayer</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const prayers = {
+  morning: {
+    icon: '🌅', title: 'Morning Prayer', subtitle: 'सुबह की प्रार्थना',
+    text: `हे प्रभु परमेश्वर, आज के इस नए दिन के लिए आपका धन्यवाद।\n\nआपकी कृपा से मैं आज उठा हूं। मेरे इस दिन को आपके हाथों में सौंपता हूं। मुझे ज्ञान और विवेक दीजिए, ताकि मैं आपकी महिमा के लिए जी सकूं।\n\nमेरे मन को शुद्ध करें, मेरे हृदय को पवित्र बनाएं। जहां भी जाऊं, आपका प्रकाश मेरे साथ हो।\n\nयीशु मसीह के नाम में, आमेन।`,
+    ref: 'भजन संहिता 118:24', verse: 'यह वह दिन है जो यहोवा ने बनाया है; हम इसमें आनंदित और मगन होंगे।'
+  },
+  evening: {
+    icon: '🌆', title: 'Evening Prayer', subtitle: 'संध्या प्रार्थना',
+    text: `हे स्वर्गीय पिता, आज के दिन के लिए आपका धन्यवाद।\n\nआज के दिन जो कुछ हुआ — जो अच्छा था उसके लिए प्रशंसा, और जो गलत हुआ उसके लिए क्षमा। मेरे मन में कोई कड़वाहट न रहे।\n\nआज जो लोग मिले, उन्हें आशीष दें। उन्हें जो ज़रूरत है वह पूरी करें।\n\nयीशु के नाम में, आमेन।`,
+    ref: 'भजन 25:16', verse: 'हे परमेश्वर, मेरी सुधि ले और मुझ पर अनुग्रह कर।'
+  },
+  night: {
+    icon: '🌙', title: 'Night Prayer', subtitle: 'रात्रि प्रार्थना',
+    text: `हे प्रभु, रात के इस पहर में मैं आपके सामने आता हूं।\n\nदिन भर की थकान को आपके चरणों में रखता हूं। जब मैं सोऊं तो आप मेरी रक्षा करें। मेरा परिवार आपकी छाया में सुरक्षित रहे।\n\nकल का दिन भी आपके हाथों में है। विश्वास में सोता हूं।\n\nयीशु के नाम में, आमेन।`,
+    ref: 'भजन 127:2', verse: 'वह अपने प्रिय लोगों को नींद में भी वरदान देता है।'
+  },
+  thanksgiving: {
+    icon: '🕊️', title: 'Thanksgiving Prayer', subtitle: 'धन्यवाद प्रार्थना',
+    text: `हे प्रभु परमेश्वर, आपका लाखों-लाख धन्यवाद!\n\nजीवन के लिए, स्वास्थ्य के लिए, परिवार के लिए — हर आशीष के लिए आभारी हूं। आपकी भलाई अनंत है, आपकी दया हमेशा बनी रहती है।\n\nमेरे जीवन में जो कठिनाइयां आईं, उनमें भी आप साथ थे। आपकी शांति जो समझ से परे है, वह मेरे मन में बनी रहे।\n\nआमेन।`,
+    ref: '1 थिस्सलुनीकियों 5:18', verse: 'हर बात में धन्यवाद करो, क्योंकि यही मसीह यीशु में तुम्हारे लिए परमेश्वर की इच्छा है।'
+  },
+  healing: {
+    icon: '💫', title: 'Healing Prayer', subtitle: 'चंगाई की प्रार्थना',
+    text: `हे चंगा करने वाले परमेश्वर, आपकी ओर आता हूं।\n\nआप जानते हैं मेरी दुर्बलता और बीमारी। आपके वचन में लिखा है कि आप चंगा करते हैं। उस वादे पर विश्वास करता हूं।\n\nमेरे शरीर को, मन को, और आत्मा को चंगाई दीजिए। आपकी शक्ति मुझमें काम करे। मैं स्वस्थ होकर आपकी महिमा करूंगा।\n\nयीशु के नाम में, आमेन।`,
+    ref: 'निर्गमन 15:26', verse: 'मैं तेरा परमेश्वर यहोवा हूं, जो तुझे चंगा करता है।'
+  },
+  family: {
+    icon: '👨‍👩‍👧‍👦', title: 'Family Prayer', subtitle: 'परिवार के लिए',
+    text: `हे प्रभु, मेरे परिवार को आपके प्रेम में लपेटें।\n\nहर सदस्य को आशीष दें — बड़े हों या छोटे। उनकी जरूरतें पूरी करें, उनके रास्ते सुरक्षित रखें। हमारे घर में प्रेम और शांति बनाए रखें।\n\nहमें एक-दूसरे से प्रेम करना सिखाएं जैसे आप हमसे प्रेम करते हैं। हमारा घर आपकी महिमा का केंद्र बने।\n\nयीशु के नाम में, आमेन।`,
+    ref: 'प्रेरितों 16:31', verse: 'प्रभु यीशु मसीह पर विश्वास कर, तो तू और तेरा सारा घराना उद्धार पाएगा।'
+  }
+};
+
+const oldTestament = [
+  {hi:'उत्पत्ति', en:'Genesis'}, {hi:'निर्गमन', en:'Exodus'}, {hi:'लेव्यव्यवस्था', en:'Leviticus'},
+  {hi:'गिनती', en:'Numbers'}, {hi:'व्यवस्थाविवरण', en:'Deuteronomy'}, {hi:'यहोशू', en:'Joshua'},
+  {hi:'न्यायियों', en:'Judges'}, {hi:'रूत', en:'Ruth'}, {hi:'1 शमूएल', en:'1 Samuel'},
+  {hi:'2 शमूएल', en:'2 Samuel'}, {hi:'1 राजाओं', en:'1 Kings'}, {hi:'2 राजाओं', en:'2 Kings'},
+  {hi:'भजन संहिता', en:'Psalms'}, {hi:'नीतिवचन', en:'Proverbs'}, {hi:'यशायाह', en:'Isaiah'},
+  {hi:'यिर्मयाह', en:'Jeremiah'}, {hi:'यहेजकेल', en:'Ezekiel'}, {hi:'दानिय्येल', en:'Daniel'}
+];
+
+const newTestament = [
+  {hi:'मत्ती', en:'Matthew'}, {hi:'मरकुस', en:'Mark'}, {hi:'लूका', en:'Luke'},
+  {hi:'यूहन्ना', en:'John'}, {hi:'प्रेरितों', en:'Acts'}, {hi:'रोमियों', en:'Romans'},
+  {hi:'1 कुरिन्थियों', en:'1 Corinthians'}, {hi:'2 कुरिन्थियों', en:'2 Corinthians'},
+  {hi:'गलातियों', en:'Galatians'}, {hi:'इफिसियों', en:'Ephesians'}, {hi:'फिलिप्पियों', en:'Philippians'},
+  {hi:'कुलुस्सियों', en:'Colossians'}, {hi:'प्रकाशितवाक्य', en:'Revelation'}
+];
+
+const hymns = [
+  {num:1, title:'Amazing Grace', hi:'अद्भुत अनुग्रह', line:'Amazing grace how sweet the sound...', tags:['praise']},
+  {num:2, title:'यीशु मेरे प्यारे', hi:'Jesus My Beloved', line:'यीशु मेरे प्यारे, तू मेरा सहारा...', tags:['prayer']},
+  {num:3, title:'How Great Thou Art', hi:'कितने महान हो तुम', line:'O Lord my God, when I in awesome wonder...', tags:['praise']},
+  {num:4, title:'जय हो प्रभु की', hi:'Glory to the Lord', line:'जय हो प्रभु की जय हो, महिमा उसकी गाओ...', tags:['praise']},
+  {num:5, title:'Silent Night', hi:'मूक रात', line:'Silent night, holy night, all is calm...', tags:['christmas']},
+  {num:6, title:'He is Risen', hi:'वह जी उठा', line:'Hallelujah! He is risen, death is conquered...', tags:['easter']},
+  {num:7, title:'प्रार्थना में आऊं', hi:'I Come in Prayer', line:'प्रार्थना में आऊं प्रभु के पास...', tags:['prayer']},
+  {num:8, title:'Great is Thy Faithfulness', hi:'तेरी विश्वासयोग्यता', line:'Great is Thy faithfulness, O God my Father...', tags:['praise']},
+];
+
+// ===== NAVIGATION =====
+function navigateTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    const dot = n.querySelector('.nav-dot');
+    if (dot) dot.remove();
+  });
+
+  document.getElementById('page-' + page).classList.add('active');
+  const navBtn = document.getElementById('nav-' + page);
+  navBtn.classList.add('active');
+
+  // Add dot to active nav
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot';
+  navBtn.appendChild(dot);
+
+  window.scrollTo(0, 0);
+
+  if (page === 'bible') renderBibleBooks('old');
+  if (page === 'hymns') renderHymns('all');
+}
+
+// ===== BIBLE =====
+let currentTestament = 'old';
+
+function renderBibleBooks(testament) {
+  const books = testament === 'old' ? oldTestament : newTestament;
+  const list = document.getElementById('bible-books-list');
+  list.innerHTML = books.map((b, i) => `
+    <div class="bible-book-item" onclick="showToast('📖 ${b.en} खुल रहा है...')">
+      <span class="book-num">${i+1}</span>
+      <div>
+        <div class="book-name-hi">${b.hi}</div>
+        <div class="book-name-en">${b.en}</div>
+      </div>
+      <span class="book-arrow">›</span>
+    </div>
+  `).join('');
+}
+
+function showTestament(t, btn) {
+  currentTestament = t;
+  document.querySelectorAll('.testament-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBibleBooks(t);
+}
+
+function filterBooks(q) {
+  const books = currentTestament === 'old' ? oldTestament : newTestament;
+  const filtered = q ? books.filter(b => b.hi.includes(q) || b.en.toLowerCase().includes(q.toLowerCase())) : books;
+  const list = document.getElementById('bible-books-list');
+  list.innerHTML = filtered.map((b, i) => `
+    <div class="bible-book-item" onclick="showToast('📖 ${b.en} खुल रहा है...')">
+      <span class="book-num">${i+1}</span>
+      <div>
+        <div class="book-name-hi">${b.hi}</div>
+        <div class="book-name-en">${b.en}</div>
+      </div>
+      <span class="book-arrow">›</span>
+    </div>
+  `).join('');
+}
+
+// ===== HYMNS =====
+function renderHymns(filter) {
+  const list = document.getElementById('hymns-list');
+  const filtered = filter === 'all' ? hymns : hymns.filter(h => h.tags.includes(filter));
+  list.innerHTML = filtered.map(h => `
+    <div class="hymn-card" onclick="showToast('🎵 ${h.title} बज रहा है...')">
+      <div class="hymn-num">भजन #${h.num}</div>
+      <div class="hymn-title">${h.title}</div>
+      <div class="hymn-first-line">${h.hi}</div>
+      <div class="hymn-footer">
+        ${h.tags.map(t => `<span class="hymn-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterHymns(filter, btn) {
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderHymns(filter);
+}
+
+// ===== PRAYER MODAL =====
+function openModal(key) {
+  const p = prayers[key];
+  document.getElementById('modal-icon').textContent = p.icon;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-subtitle').textContent = p.subtitle;
+  document.getElementById('modal-prayer').innerHTML = p.text.replace(/\n/g, '<br>');
+  document.getElementById('modal-verse-ref').textContent = p.ref;
+  document.getElementById('modal-verse-txt').textContent = p.verse;
+  document.getElementById('prayer-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  window._currentPrayer = p;
+}
+
+function closeModal() {
+  document.getElementById('prayer-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target.id === 'prayer-modal') closeModal();
+}
+
+// ===== SHARE =====
+function shareVerse() {
+  const text = `✦ आज का वचन | Verse of the Day\n\nभजन संहिता 23:1\nप्रभु मेरा चरवाहा है; मुझे किसी वस्तु की कमी नहीं होगी।\n\nPsalm 23:1\nThe Lord is my shepherd; I shall not want.\n\n— दैनिक प्रार्थना Daily Prayer App`;
+  copyAndShare(text);
+}
+
+function sharePrayer() {
+  const p = window._currentPrayer;
+  if (!p) return;
+  const text = `🙏 ${p.title}\n\n${p.text}\n\n${p.ref}: "${p.verse}"\n\n— दैनिक प्रार्थना Daily Prayer App`;
+  copyAndShare(text);
+}
+
+function shareApp() {
+  const text = `📱 दैनिक प्रार्थना - Daily Prayer App\n\nरोज़ की प्रार्थना, बाइबिल और भजन के लिए यह ऐप डाउनलोड करें!\nजीवन में परमेश्वर की उपस्थिति महसूस करें।\n\n#DailyPrayer #दैनिकप्रार्थना`;
+  copyAndShare(text);
+}
+
+function copyAndShare(text) {
+  if (navigator.share) {
+    navigator.share({ text: text }).catch(() => copyToClipboard(text));
+  } else {
+    copyToClipboard(text);
+  }
+}
+
+function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => showToast('✅ Text copied! Paste करके share करें'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('✅ Text copied! Paste करके share करें');
+  }
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ===== TOGGLE =====
+function toggleSwitch(el) {
+  el.classList.toggle('on');
+}
+
+// ===== INIT =====
+// Fix initial nav dot
+document.getElementById('nav-home').innerHTML += '<div class="nav-dot"></div>';
+</script>
+</body>
+</html>
