@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>दैनिक प्रार्थना Daily Prayer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#313442",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#dbe1ff",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-surface-variant": "#d0c5af",
+                        "on-surface": "#dfe2f3",
+                        "on-primary-fixed-variant": "#574500",
+                        "outline": "#99907c",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#544600",
+                        "secondary": "#fff9ef",
+                        "secondary-fixed-dim": "#e9c400",
+                        "on-secondary-fixed": "#221b00",
+                        "surface-dim": "#0f131f",
+                        "background": "#0f131f",
+                        "tertiary-container": "#97b0ff",
+                        "on-tertiary-container": "#254188",
+                        "secondary-container": "#ffdb3c",
+                        "on-secondary-container": "#725f00",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "primary-fixed": "#ffe088",
+                        "surface-tint": "#e9c349",
+                        "on-primary-container": "#554300",
+                        "surface-variant": "#313442",
+                        "surface-container-lowest": "#0a0e1a",
+                        "surface": "#0f131f",
+                        "inverse-primary": "#735c00",
+                        "surface-container-high": "#262a37",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "inverse-on-surface": "#2c303d",
+                        "on-primary-fixed": "#241a00",
+                        "on-tertiary": "#082b72",
+                        "secondary-fixed": "#ffe16d",
+                        "surface-bright": "#353946",
+                        "on-primary": "#3c2f00",
+                        "primary": "#f2ca50",
+                        "surface-container": "#1b1f2c",
+                        "surface-container-low": "#171b28",
+                        "error-container": "#93000a",
+                        "primary-container": "#d4af37",
+                        "on-error": "#690005",
+                        "tertiary": "#bfcdff",
+                        "on-secondary": "#3a3000",
+                        "outline-variant": "#4d4635",
+                        "inverse-surface": "#dfe2f3",
+                        "on-background": "#dfe2f3",
+                        "on-tertiary-fixed": "#00174b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-padding": "24px",
+                        "stack-sm": "12px",
+                        "stack-lg": "40px",
+                        "stack-md": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "hindi-label": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "hindi-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(49, 52, 66, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(242, 202, 80, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .gold-glow {
+            filter: drop-shadow(0 0 8px rgba(242, 202, 80, 0.5));
+        }
+        .divine-aura {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(15, 19, 31, 0) 70%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header Section -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl flex justify-between items-center px-container-padding py-unit">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary text-headline-md" data-icon="person">person</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-primary text-headline-md font-headline-md drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">दैनिक प्रार्थना Daily Prayer</span>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary text-headline-md" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="max-w-[600px] mx-auto px-container-padding pt-32 pb-32 flex flex-col items-center">
+<!-- Visual Anchor: Glistening Cross -->
+<div class="relative mb-stack-md">
+<div class="absolute inset-0 divine-aura scale-150 -z-10"></div>
+<span class="material-symbols-outlined text-[80px] text-primary gold-glow" data-icon="church" style="font-variation-settings: 'FILL' 1;">church</span>
+</div>
+<!-- Branding Header -->
+<div class="text-center mb-stack-lg">
+<h2 class="text-on-surface-variant font-hindi-label text-hindi-label tracking-widest mb-1">दैनिक प्रार्थना</h2>
+<h1 class="text-primary font-headline-xl text-headline-xl">Daily Prayer</h1>
+</div>
+<!-- Verse of the Day Bento Section -->
+<section class="w-full mb-stack-lg">
+<div class="glass-card rounded-xl p-stack-md border-t-2 border-t-primary/40 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" data-icon="format_quote">format_quote</span>
+</div>
+<div class="flex items-center gap-2 mb-stack-sm text-primary">
+<span class="material-symbols-outlined text-label-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-headline-md text-headline-md">आज का वचन | Verse of the Day</span>
+</div>
+<div class="space-y-stack-sm relative z-10">
+<div class="border-l-2 border-primary/30 pl-4 py-1">
+<p class="text-primary font-bold mb-1">भजन संहिता 23:1</p>
+<p class="text-on-surface text-body-lg leading-relaxed">प्रभु मेरा चरवाहा है; मुझे किसी वस्तु की कमी नहीं होगी।</p>
+</div>
+<div class="border-l-2 border-outline-variant pl-4 py-1">
+<p class="text-primary/70 font-bold mb-1">Psalm 23:1</p>
+<p class="text-on-surface-variant text-body-lg italic">The Lord is my shepherd; I shall not want.</p>
+</div>
+</div>
+<div class="mt-stack-md flex justify-end">
+<button class="text-primary text-label-sm font-label-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[16px]" data-icon="share">share</span> Share Word
+                    </button>
+</div>
+</div>
+</section>
+<!-- Quick Access Buttons -->
+<nav class="w-full space-y-stack-sm">
+<!-- Morning Prayer -->
+<button class="w-full glass-card hover:bg-surface-variant/20 transition-all duration-300 py-stack-sm px-stack-md rounded-full flex items-center justify-between group active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container/20 p-2 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+</div>
+<div class="text-left">
+<p class="text-on-surface font-headline-md text-headline-md">मगनार Morning Prayer</p>
+<p class="text-on-surface-variant text-label-sm">Start your day in His grace</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- Evening Prayer -->
+<button class="w-full glass-card hover:bg-surface-variant/20 transition-all duration-300 py-stack-sm px-stack-md rounded-full flex items-center justify-between group active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container/20 p-2 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="partly_cloudy_night">partly_cloudy_night</span>
+</div>
+<div class="text-left">
+<p class="text-on-surface font-headline-md text-headline-md">इवणर Evening Prayer</p>
+<p class="text-on-surface-variant text-label-sm">Reflection and gratitude</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- Night Prayer -->
+<button class="w-full glass-card hover:bg-surface-variant/20 transition-all duration-300 py-stack-sm px-stack-md rounded-full flex items-center justify-between group active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container/20 p-2 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</div>
+<div class="text-left">
+<p class="text-on-surface font-headline-md text-headline-md">नायर Night Prayer</p>
+<p class="text-on-surface-variant text-label-sm">Peaceful rest in faith</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+</nav>
+<!-- Aesthetic Imagery Placeholder -->
+<div class="w-full mt-stack-lg rounded-xl overflow-hidden glass-card h-[160px] relative">
+<img class="w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="A cinematic, low-angle shot of sunlight rays breaking through golden stained glass windows inside a majestic, dark stone cathedral. The air is filled with soft dust motes shimmering in the light, creating a divine and ethereal atmosphere. The color palette is dominated by deep celestial blues and warm, radiant golds. The mood is one of profound silence and sacred reverence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALIvkuceF464pNyysVNNSkV-GxevbIIxCGY4YJgItJN4Vu3I-LGQkiXvwMs37rjhPX4aeJV4bhEgS6S4_2K0vDBUd0RNrK8WtYo9vJSyvMNMDRfihN2VIRkXROsB841CdOJ3dspKj1sUizmnbCnWnXa9AbhRG_xzxNxl80GqFQ703cwDevSQJMiO8LdgzdOTnOmBTyhWnC5RDVspEGMchNvUX3hREzMk_cwyu8t-oa2sil06YXr7McUkT7x368hOwYUVlfiRwGltRX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent flex flex-col justify-end p-stack-md">
+<p class="text-on-surface font-headline-md text-headline-md">Weekly Devotional</p>
+<p class="text-on-surface-variant text-label-sm">Explore our latest study on the Psalms</p>
+</div>
+</div>
+</main>
+<!-- Navigation Shell -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface-container-low/90 backdrop-blur-lg border-t border-outline-variant/30 shadow-lg rounded-t-xl">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold transition-all duration-300 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+<div class="w-1 h-1 bg-primary rounded-full mt-1"></div>
+</a>
+<!-- Prayers -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary/80 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="pray">prayer_times</span>
+<span class="text-label-sm font-label-sm">Prayers</span>
+</a>
+<!-- Bible -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary/80 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="text-label-sm font-label-sm">Bible</span>
+</a>
+<!-- Hymns -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary/80 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+<span class="text-label-sm font-label-sm">Hymns</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary/80 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-sm font-label-sm">Settings</span>
+</a>
+</footer>
+<script>
+        // Simple micro-interaction for tapping cards
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple absolute bg-primary/20 rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2';
+                const rect = el.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                
+                el.style.position = 'relative';
+                el.style.overflow = 'hidden';
+                el.appendChild(ripple);
+                
+                ripple.animate([
+                    { transform: 'scale(0)', opacity: 1 },
+                    { transform: 'scale(2)', opacity: 0 }
+                ], {
+                    duration: 500,
+                    easing: 'ease-out'
+                }).onfinish = () => ripple.remove();
+            });
+        });
+    </script>
+</body></html>
